@@ -1,0 +1,32 @@
+.container {
+  border: 1px solid black;
+  height: 100vh;
+  display: flex;
+}
+.container--navigation,
+.container-view-section {
+  height: 100%;
+  overflow: scroll;
+}
+
+.container--navigation {
+  flex: 2;
+  background-color: aliceblue;
+}
+
+.container--view-section {
+  flex: 4;
+}
+
+.customer--card {
+  background-color: whitesmoke;
+  padding: 20px;
+  color: gray;
+}
+
+.customer--card--name {
+  color: black;
+  display: inline-block;
+  margin-bottom: 16px;
+  font-size: 22px;
+}
