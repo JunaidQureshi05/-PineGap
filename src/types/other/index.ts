@@ -5,12 +5,6 @@ export type ReduxStoreStateType = {
   selectedCustomer: CustomerDetailType | null;
 };
 
-export type SetSelectedCustomerActionType = {
-  payload: {
-    id: number;
-  };
-};
-
 export enum API_STATUS {
   default = "default",
   in_progress = "started",

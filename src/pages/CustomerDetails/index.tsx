@@ -3,15 +3,16 @@ import s from "./CustomerDetails.module.css";
 import { useSelector } from "react-redux";
 import { getRandomImages } from "../../services/getRandomImages";
 import { API_STATUS } from "../../types/other";
+import { RootState } from "../../store/store";
+
 export const CustomerDetails = () => {
   const [dataAPIStatus, setDataAPIStatus] = useState<API_STATUS>(
     API_STATUS.default
   );
   const [images, setImages] = useState([]);
   const customerData = useSelector(
-    (state: any) => state?.customerData?.selectedCustomer
+    (state: RootState) => state.customerData.selectedCustomer
   );
-  console.log(">>>>>Customer Data", customerData);
 
   async function loadImages() {
     setDataAPIStatus(API_STATUS.in_progress);
