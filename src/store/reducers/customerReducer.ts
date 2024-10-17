@@ -1,7 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Customers } from "../../data/customers";
+import { CustomerDetailType } from "../../types/customer";
+import {
+  ReduxStoreStateType,
+  SetSelectedCustomerActionType,
+} from "../../types/other";
 
-const initialState = {
+const initialState: ReduxStoreStateType = {
   customers: Customers,
   selectedCustomer: null,
 };
@@ -10,13 +15,15 @@ export const customerReducer = createSlice({
   name: "customer",
   initialState,
   reducers: {
-    setSelectedCustomer: (state: any, action: any): any => {
+    setSelectedCustomer: (
+      state: ReduxStoreStateType,
+      action: SetSelectedCustomerActionType
+    ): any => {
       console.log("Available customers:", state.customers);
       debugger;
-      const id = action?.payload?.id;
+      const id: number = action.payload.id;
 
-      const customer = state.customers[id];
-      console.log("#######", id, JSON.parse(JSON.stringify(state.customers)));
+      const customer: CustomerDetailType = state.customers[id];
       if (customer) {
         state.selectedCustomer = customer;
       }
