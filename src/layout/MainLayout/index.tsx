@@ -1,14 +1,13 @@
 import React from "react";
 import "./MainLayout.css";
 import { useDispatch, useSelector } from "react-redux";
-import { setSelectedCustomer } from "../../store/reducers/customerReducer";
+import { setSelectedCustomer } from "../../redux/reducers/customerReducer";
 import { Outlet } from "react-router-dom";
 const MainLayout = () => {
   const { customers: data, selectedCustomer } = useSelector(
     (state: any) => state?.customerData
   );
   const dispatch = useDispatch();
-  console.log("data", selectedCustomer);
 
   function handleCustomerClick(index: number): void {
     dispatch(setSelectedCustomer({ id: index }));

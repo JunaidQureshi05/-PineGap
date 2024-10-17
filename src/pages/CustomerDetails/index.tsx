@@ -1,12 +1,12 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, Component } from "react";
 import s from "./CustomerDetails.module.css";
 import { useSelector } from "react-redux";
 import { getRandomImages } from "../../services/getRandomImages";
 import { API_STATUS } from "../../types/other";
-import { RootState } from "../../store/store";
+import { RootState } from "../../redux/store";
 import AnimatedImage from "../../components/AnimatedImage";
 
-export const CustomerDetails = (): any => {
+export const CustomerDetails = () => {
   const [dataAPIStatus, setDataAPIStatus] = useState<API_STATUS>(
     API_STATUS.default
   );
@@ -16,7 +16,6 @@ export const CustomerDetails = (): any => {
     (state: RootState) => state.customerData.selectedCustomer
   );
 
-  console.log("@@@@@@", customerData);
   const timerId = useRef<NodeJS.Timeout | null>(null);
   const pageNumber = useRef(1);
 
@@ -66,7 +65,7 @@ export const CustomerDetails = (): any => {
         <p className={s.title}>{customerData?.title}</p>
         <p className={s.address}>{customerData?.address}</p>
         {dataAPIStatus === API_STATUS.in_progress ? (
-          <div>Loading...</div>
+          <div className={s.loadingScreen}>Fetching images...</div>
         ) : dataAPIStatus === API_STATUS.failure && errorMessage ? (
           <div className={s.error}>{errorMessage}</div>
         ) : (
