@@ -1,0 +1,35 @@
+.container {
+  padding: 16px;
+  height: 100vh;
+  overflow: scroll;
+}
+
+.customerName {
+  font-size: 22px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.title {
+  text-align: center;
+  text-decoration: underline;
+  margin: 8px 0;
+}
+.address {
+  text-align: center;
+}
+
+.gallery {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: repeat(3, 300px);
+  grid-template-rows: repeat(3, 300px);
+  gap: 20px;
+}
+
+.gallery img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}

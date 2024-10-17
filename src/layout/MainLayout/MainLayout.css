@@ -1,5 +1,4 @@
 .container {
-  border: 1px solid black;
   height: 100vh;
   display: flex;
 }
@@ -22,6 +21,11 @@
   background-color: whitesmoke;
   padding: 20px;
   color: gray;
+  cursor: pointer;
+}
+
+.customer--card.selected--customer--card {
+  background-color: darkgrey;
 }
 
 .customer--card--name {

@@ -16,6 +16,7 @@ export const customerReducer = createSlice({
       const id = action?.payload?.id;
 
       const customer = state.customers[id];
+      console.log("#######", id, JSON.parse(JSON.stringify(state.customers)));
       if (customer) {
         state.selectedCustomer = customer;
       }

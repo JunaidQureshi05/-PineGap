@@ -1,25 +1,28 @@
 import React from "react";
 import "./MainLayout.css";
-import { Customers } from "../../data/customers";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectedCustomer } from "../../store/reducers/customerReducer";
 import { Outlet } from "react-router-dom";
 const MainLayout = () => {
-  const data: any[] = useSelector(
-    (state: any) => state?.customerData?.customers
+  const { customers: data, selectedCustomer } = useSelector(
+    (state: any) => state?.customerData
   );
   const dispatch = useDispatch();
-  console.log("data", data);
+  console.log("data", selectedCustomer);
 
   function handleCustomerClick(index: number): void {
     dispatch(setSelectedCustomer({ id: index }));
   }
+
   return (
     <div className="container">
       <div className="container--navigation">
-        {data?.map((customer, index) => (
+        {data?.map((customer: any, index: number) => (
           <div
-            className="customer--card"
+            className={[
+              "customer--card",
+              index === selectedCustomer?.id ? "selected--customer--card" : "",
+            ].join(" ")}
             onClick={() => handleCustomerClick(index)}
           >
             <span className="customer--card--name">{customer?.name}</span>
