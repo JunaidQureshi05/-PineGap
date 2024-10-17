@@ -13,11 +13,8 @@ const customerSlice = createSlice({
   initialState,
   reducers: {
     setSelectedCustomer: (state, action: PayloadAction<{ id: number }>) => {
-      console.log("Available customers:", state.customers);
       const { id } = action.payload;
-
       const customer = state.customers.find((cust) => cust.id === id);
-
       if (customer) {
         state.selectedCustomer = customer;
       }
@@ -25,8 +22,6 @@ const customerSlice = createSlice({
   },
 });
 
-// Export the actions
 export const { setSelectedCustomer } = customerSlice.actions;
 
-// Export the reducer
 export default customerSlice.reducer;

@@ -33,3 +33,20 @@
   object-fit: cover;
   border-radius: 8px;
 }
+
+.notDataPage {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.notDataPage .heading {
+  font-size: 3rem;
+  margin-bottom: 8px;
+}
+
+.notDataPage .subheading {
+  font-size: 1rem;
+}
