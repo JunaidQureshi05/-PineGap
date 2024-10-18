@@ -1,8 +1,9 @@
 import React from "react";
-import "./MainLayout.css";
+import s from "./MainLayout.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectedCustomer } from "../../redux/reducers/customerReducer";
 import { Outlet } from "react-router-dom";
+import cn from "classnames";
 const MainLayout = () => {
   const { customers: data, selectedCustomer } = useSelector(
     (state: any) => state?.customerData
@@ -14,17 +15,16 @@ const MainLayout = () => {
   }
 
   return (
-    <div className="container">
-      <div className="container--navigation">
+    <div className={s.container}>
+      <div className={s.containerNavigation}>
         {data?.map((customer: any, index: number) => (
           <div
-            className={[
-              "customer--card",
-              index === selectedCustomer?.id ? "selected--customer--card" : "",
-            ].join(" ")}
+            className={cn(s.customerCard, {
+              [s.selectedCustomerCard]: index === selectedCustomer?.id,
+            })}
             onClick={() => handleCustomerClick(index)}
           >
-            <span className="customer--card--name">{customer?.name}</span>
+            <span className={s.customerCardName}>{customer?.name}</span>
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla
               perferendis exercitationem quam magnam libero accusantium harum
@@ -36,7 +36,7 @@ const MainLayout = () => {
           </div>
         ))}
       </div>
-      <div className="container--view-section">
+      <div className={s.containerViewSection}>
         <Outlet />
       </div>
     </div>

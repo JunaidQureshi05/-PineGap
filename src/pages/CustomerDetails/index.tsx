@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, Component } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import s from "./CustomerDetails.module.css";
 import { useSelector } from "react-redux";
 import { getRandomImages } from "../../services/getRandomImages";
@@ -6,13 +6,15 @@ import { API_STATUS } from "../../types/other";
 import { RootState } from "../../redux/store";
 import AnimatedImage from "../../components/AnimatedImage";
 
+import { IMAGES_CHANGE_TIME } from "../../constants";
+
 export const CustomerDetails = () => {
   const [dataAPIStatus, setDataAPIStatus] = useState<API_STATUS>(
     API_STATUS.default
   );
   const [images, setImages] = useState<string[]>([]);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const customerData: any = useSelector(
+  const customerData = useSelector(
     (state: RootState) => state.customerData.selectedCustomer
   );
 
@@ -39,16 +41,27 @@ export const CustomerDetails = () => {
     if (!customerData) {
       return;
     }
-    loadImages();
+
+    // Reset the page number before loading new images
     pageNumber.current = 1;
-    timerId.current = setInterval(loadImages, 10000);
+    loadImages();
+
+    // Clear any existing interval
+    if (timerId.current) {
+      clearInterval(timerId.current);
+    }
+
+    // Set up interval to refresh images
+    timerId.current = setInterval(loadImages, IMAGES_CHANGE_TIME);
 
     return () => {
+      // Cleanup interval on unmount or customer change
       if (timerId.current) {
         clearInterval(timerId.current);
       }
     };
   }, [JSON.stringify(customerData)]);
+
   if (!customerData) {
     return (
       <div className={s.notDataPage}>
@@ -71,9 +84,7 @@ export const CustomerDetails = () => {
         ) : (
           <div className={s.gallery}>
             {images.map((url: string, idx: number) => (
-              <>
-                <AnimatedImage src={url} key={idx} alt={`Image ${idx + 1}`} />
-              </>
+              <AnimatedImage src={url} key={idx} alt={`Image ${idx + 1}`} />
             ))}
           </div>
         )}

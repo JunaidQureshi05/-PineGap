@@ -2,6 +2,7 @@
   padding: 16px;
   height: 100vh;
   overflow: scroll;
+  box-sizing: border-box;
 }
 
 .customerName {

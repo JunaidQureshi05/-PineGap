@@ -1,0 +1,1 @@
+export const IMAGES_CHANGE_TIME = 10000;
